@@ -1,42 +1,40 @@
-# Função para encontrar o tempo de todos os processos 
-def tempoEsperaProcesso(processo, n, burst_time, tempo): 
-    tempo[0] = 0
-   
-    for i in range(1, n ): 
-        tempo[i] = burst_time[i - 1] + tempo[i - 1]  
+def mediaTempo( processo, burstTime): 
   
-def tempoRespostaProcesso(processo, n, burst_time, tempo, tempoResp): 
-
-    for i in range(n): 
-        tempoResp[i] = burst_time[i] + tempo[i] 
-
-def mediaTempo( processo, n, burst_time): 
-  
-    tempo = [0] * n 
-    tempoResp = [0] * n  
+    tempo = [0] * len(processo)  
+    tempoResp = [0] * len(processo)   
     total_tempo = 0
     total_tempoResp = 0
+    
+    #Buscando tempo de espera de cada proceso
+    tempo[0] = 0
   
-    tempoEsperaProcesso(processo, n, burst_time, tempo) 
+    #O tempo de espera de um processo sempre vair ser o tempo de espera somado com o burstTime do processo anterior 
+    for i in range(1, len(processo)): 
+      tempo[i] = burstTime[i - 1] + tempo[i - 1]  
+
+    #Buscando o tempo de resposta de cada processo
+
+    #O tempo de resposta de um processo sempre vai ser o seu tempo de espera + burstTime
+    for i in range(len(processo)): 
+      tempoResp[i] = burstTime[i] + tempo[i]
+     
+    print ('*-------------------------------------------------------*')
+    print( "| Processo | Burst time | Tempo Espera | Tempo Resposta |") 
+    print ('*-------------------------------------------------------*')
   
-    tempoRespostaProcesso(processo, n, burst_time, tempo, tempoResp) 
-  
-    print( "processo Burst time " + " Waiting time " + " Turn around time") 
-  
-    for i in range(n): 
-      
-        total_tempo = total_tempo + tempo[i] 
-        total_tempoResp = total_tempoResp + tempoResp[i] 
-        print(" " + str(i + 1) + "\t\t" + str(burst_time[i]) + "\t " + str([i]) + "\t\t " + str(tempoResp[i]))  
-  
-    print( "Média tempo de espera = " + str(total_tempo / n)) 
-    print("Média tempo de resposta = " + str(total_tempoResp / n)) 
+    for i in range(len(processo) ): 
+        total_tempo += tempo[i] 
+        total_tempoResp += tempoResp[i] 
+        print(" " + str(processo[i]) + "\t\t" + str(burstTime[i]) + "\t\t\t " + str(tempo[i]) + "\t\t\t\t " + str(tempoResp[i]))  
+
+    print ('*-------------------------------------------------------*')
+    print( "Média tempo de espera = " + str(total_tempo / len(processo) )) 
+    print("Média tempo de resposta = " + str(total_tempoResp / len(processo))) 
   
 if __name__ == "__main__": 
-      
-    processo = [ 1, 2, 3] 
-    n = len(processo) 
+
+    processo = [ 'word   ', 'chrome  ', 'sublime'] 
+
+    burstTime = [10, 15, 8] 
   
-    burst_time = [10, 5, 8] 
-  
-    mediaTempo(processo, n, burst_time) 
+    mediaTempo(processo, burstTime) 
