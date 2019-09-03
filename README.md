@@ -7,3 +7,4 @@ Data entrega: 01/10/2019
 #2 - Job mais curto
 #3 - Job mais curto com preepsão
 #4 - Round Robin
+#5 - Prioridades
