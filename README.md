@@ -1,6 +1,7 @@
 # sistemasoperacionais
 Sistemas Operacionais II - 6º Semestre - Ciência da Computação
 
+Data entrega: 01/10/2019
 
 #1 - FCFS
 #2 - Job mais curto
